@@ -1,5 +1,6 @@
 package com.yungnickyoung.minecraft.betterdungeons.world.processor.zombie_dungeon;
 
+import net.minecraft.world.entity.EntityTypes;
 import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdungeons.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SpawnerBlock;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -27,7 +27,7 @@ import java.util.Optional;
  */
 
 
-public class ZombieMobSpawnerProcessor extends StructureProcessor {
+public class ZombieMobSpawnerProcessor implements StructureProcessor {
     public static final ZombieMobSpawnerProcessor INSTANCE = new ZombieMobSpawnerProcessor();
     public static final MapCodec<ZombieMobSpawnerProcessor> CODEC = MapCodec.unit(() -> INSTANCE);
 
@@ -35,7 +35,7 @@ public class ZombieMobSpawnerProcessor extends StructureProcessor {
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader,
                                                              BlockPos jigsawPiecePos,
                                                              BlockPos jigsawPieceBottomCenterPos,
-                                                             StructureTemplate.StructureBlockInfo blockInfoLocal,
+                                                             BlockPos templateRelativePos,
                                                              StructureTemplate.StructureBlockInfo blockInfoGlobal,
                                                              StructurePlaceSettings structurePlacementData) {
         if (blockInfoGlobal.state().getBlock() instanceof SpawnerBlock) {
@@ -46,7 +46,7 @@ public class ZombieMobSpawnerProcessor extends StructureProcessor {
                             Optional.empty(),
                             Optional.empty())))
                     .maxNearbyEntities(8)
-                    .setEntityType(EntityType.ZOMBIE)
+                    .setEntityType(EntityTypes.ZOMBIE)
                     .build();
             CompoundTag nbt = spawner.save();
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
@@ -54,7 +54,8 @@ public class ZombieMobSpawnerProcessor extends StructureProcessor {
         return blockInfoGlobal;
     }
 
-    protected StructureProcessorType<?> getType() {
+    @Override
+    public MapCodec<? extends StructureProcessor> codec() {
         return StructureProcessorTypeModule.ZOMBIE_MOB_SPAWNER_PROCESSOR;
     }
 }

@@ -1,8 +1,7 @@
 plugins {
     // see https://fabricmc.net/develop/ for new versions
-    id 'net.fabricmc.fabric-loom' version '1.15.5' apply false
     // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
-    id 'net.neoforged.moddev' version '2.0.141' apply false
+    id 'net.neoforged.moddev' version '2.0.147' apply false
     id 'net.darkhax.curseforgegradle' version "${cursegradle_version}" apply false // curseforge publishing
     id "com.modrinth.minotaur" version "2.+" apply false // modrinth publishing
 }
@@ -21,9 +20,9 @@ subprojects {
     }
 }
 
-task publishCurseForge(dependsOn: [':Fabric:publishCurseForgeFabric', ':NeoForge:publishCurseForgeNeoForge']) {
+task publishCurseForge(dependsOn: [':NeoForge:publishCurseForgeNeoForge']) {
 }
-task publishModrinth(dependsOn: [':Fabric:modrinth', ':NeoForge:modrinth']) {
+task publishModrinth(dependsOn: [':NeoForge:modrinth']) {
 }
 task publishCurseAndModrinth(dependsOn: ['publishCurseForge', 'publishModrinth']) {
 }
