@@ -5,12 +5,12 @@ import com.mojang.serialization.MapCodec;
 import com.yungnickyoung.minecraft.betterdungeons.module.StructureProcessorTypeModule;
 import com.yungnickyoung.minecraft.yungsapi.world.spawner.MobSpawnerData;
 
-import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.world.entity.EntityEquipment;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -43,10 +43,11 @@ public class ZombieTombstoneSpawnerProcessor implements StructureProcessor {
             MobSpawnerData spawner = MobSpawnerData.builder()
                     .setEntityType(EntityTypes.SKELETON)
                     .build();
-            spawner.nextSpawnData.getEntityToSpawn().put("HandItems", Util.make(new ListTag(), (handItemsTag) -> {
-                Tag ironSwordNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.IRON_SWORD)).getOrThrow();
-                handItemsTag.add(ironSwordNbt);
-            }));
+            EntityEquipment equipment = new EntityEquipment();
+            equipment.set(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+            spawner.nextSpawnData.getEntityToSpawn().put("equipment", EntityEquipment.CODEC
+                    .encodeStart(RegistryOps.create(NbtOps.INSTANCE, levelReader.registryAccess()), equipment)
+                    .getOrThrow());
             CompoundTag nbt = spawner.save();
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
         }

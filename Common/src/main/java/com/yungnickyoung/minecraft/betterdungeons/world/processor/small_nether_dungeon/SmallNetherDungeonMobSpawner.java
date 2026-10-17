@@ -10,12 +10,14 @@ import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.FloatTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.WeightedList;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.world.entity.DropChances;
+import net.minecraft.world.entity.EntityEquipment;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LevelReader;
@@ -63,33 +65,7 @@ public class SmallNetherDungeonMobSpawner implements StructureProcessor {
                             Util.make(new CompoundTag(), (compoundTag) -> {
                                 compoundTag.putString("id", spawnerMob.toString());
                                 if (spawnerMob.toString().equals("minecraft:wither_skeleton")) {
-                                    compoundTag.put("ArmorItems", Util.make(new ListTag(), (armorItemsNbt) -> {
-                                        // Boots
-                                        Tag bootsNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_BOOTS)).getOrThrow();
-                                        armorItemsNbt.add(bootsNbt);
-
-                                        // Leggings
-                                        Tag leggingsNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_LEGGINGS)).getOrThrow();
-                                        armorItemsNbt.add(leggingsNbt);
-
-                                        // Chestplate
-                                        Tag chestNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_CHESTPLATE)).getOrThrow();
-                                        armorItemsNbt.add(chestNbt);
-
-                                        // Helmet
-                                        Tag helmetNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_HELMET)).getOrThrow();
-                                        armorItemsNbt.add(helmetNbt);
-                                    }));
-                                    compoundTag.put("ArmorDropChances", Util.make(new ListTag(), (armorDropChancesNbt) -> {
-                                        armorDropChancesNbt.add(FloatTag.valueOf(0));
-                                        armorDropChancesNbt.add(FloatTag.valueOf(0));
-                                        armorDropChancesNbt.add(FloatTag.valueOf(0));
-                                        armorDropChancesNbt.add(FloatTag.valueOf(0));
-                                    }));
-                                    compoundTag.put("HandItems", Util.make(new ListTag(), (handItemsNbt) -> {
-                                        Tag stoneSwordNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.STONE_SWORD)).getOrThrow();
-                                        handItemsNbt.add(stoneSwordNbt);
-                                    }));
+                                    addWitherSkeletonEquipment(compoundTag, levelReader);
                                     if (!BetterDungeonsCommon.CONFIG.smallNetherDungeons.witherSkeletonsDropWitherSkulls) {
                                         compoundTag.putString("DeathLootTable", "minecraft:empty");
                                     }
@@ -110,33 +86,7 @@ public class SmallNetherDungeonMobSpawner implements StructureProcessor {
                             .value())
                     .build();
             if (spawnerMob.toString().equals("minecraft:wither_skeleton")) {
-                spawner.nextSpawnData.getEntityToSpawn().put("ArmorItems", Util.make(new ListTag(), (armorItemsNbt) -> {
-                    // Boots
-                    Tag bootsNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_BOOTS)).getOrThrow();
-                    armorItemsNbt.add(bootsNbt);
-
-                    // Leggings
-                    Tag leggingsNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_LEGGINGS)).getOrThrow();
-                    armorItemsNbt.add(leggingsNbt);
-
-                    // Chestplate
-                    Tag chestNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_CHESTPLATE)).getOrThrow();
-                    armorItemsNbt.add(chestNbt);
-
-                    // Helmet
-                    Tag helmetNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.NETHERITE_HELMET)).getOrThrow();
-                    armorItemsNbt.add(helmetNbt);
-                }));
-                spawner.nextSpawnData.getEntityToSpawn().put("ArmorDropChances", Util.make(new ListTag(), (armorDropChancesNbt) -> {
-                    armorDropChancesNbt.add(FloatTag.valueOf(0));
-                    armorDropChancesNbt.add(FloatTag.valueOf(0));
-                    armorDropChancesNbt.add(FloatTag.valueOf(0));
-                    armorDropChancesNbt.add(FloatTag.valueOf(0));
-                }));
-                spawner.nextSpawnData.getEntityToSpawn().put("HandItems", Util.make(new ListTag(), (handItemsNbt) -> {
-                    Tag stoneSwordNbt = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, new ItemStack(Items.STONE_SWORD)).getOrThrow();
-                    handItemsNbt.add(stoneSwordNbt);
-                }));
+                addWitherSkeletonEquipment(spawner.nextSpawnData.getEntityToSpawn(), levelReader);
                 if (!BetterDungeonsCommon.CONFIG.smallNetherDungeons.witherSkeletonsDropWitherSkulls) {
                     spawner.nextSpawnData.getEntityToSpawn().putString("DeathLootTable", "minecraft:empty");
                 }
@@ -149,6 +99,24 @@ public class SmallNetherDungeonMobSpawner implements StructureProcessor {
             blockInfoGlobal = new StructureTemplate.StructureBlockInfo(blockInfoGlobal.pos(), Blocks.SPAWNER.defaultBlockState(), nbt);
         }
         return blockInfoGlobal;
+    }
+
+    private static void addWitherSkeletonEquipment(CompoundTag entityTag, LevelReader levelReader) {
+        RegistryOps<Tag> ops = RegistryOps.create(NbtOps.INSTANCE, levelReader.registryAccess());
+        EntityEquipment equipment = new EntityEquipment();
+        equipment.set(EquipmentSlot.FEET, new ItemStack(Items.NETHERITE_BOOTS));
+        equipment.set(EquipmentSlot.LEGS, new ItemStack(Items.NETHERITE_LEGGINGS));
+        equipment.set(EquipmentSlot.CHEST, new ItemStack(Items.NETHERITE_CHESTPLATE));
+        equipment.set(EquipmentSlot.HEAD, new ItemStack(Items.NETHERITE_HELMET));
+        equipment.set(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
+        entityTag.put("equipment", EntityEquipment.CODEC.encodeStart(ops, equipment).getOrThrow());
+
+        DropChances dropChances = DropChances.DEFAULT
+                .withEquipmentChance(EquipmentSlot.FEET, 0)
+                .withEquipmentChance(EquipmentSlot.LEGS, 0)
+                .withEquipmentChance(EquipmentSlot.CHEST, 0)
+                .withEquipmentChance(EquipmentSlot.HEAD, 0);
+        entityTag.put("drop_chances", DropChances.CODEC.encodeStart(ops, dropChances).getOrThrow());
     }
 
     @Override
