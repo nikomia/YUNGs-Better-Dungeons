@@ -24,9 +24,7 @@
     {
       "rules": [
         {
-          "output_state": {
-            "Name": "minecraft:cave_air"
-          },
+          "output_state": "minecraft:cave_air",
           "input_predicate": {
             "block": "minecraft:air",
             "predicate_type": "minecraft:block_match"

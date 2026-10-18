@@ -26,7 +26,7 @@ import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.material.Fluids;
 
@@ -47,7 +47,7 @@ public class SpiderDungeonEggRoomPiece extends SpiderDungeonPiece {
 
     public SpiderDungeonEggRoomPiece(BlockPos startPos, int pieceChainLength) {
         super(StructurePieceTypeModule.EGG_ROOM, pieceChainLength, getInitialBoundingBox(startPos));
-        this.startPos = new BlockPos(startPos);
+        this.startPos = startPos.immutable();
     }
 
     /**
@@ -70,7 +70,7 @@ public class SpiderDungeonEggRoomPiece extends SpiderDungeonPiece {
     }
 
     @Override
-    public void addChildren(StructurePiece structurePiece, StructurePieceAccessor structurePieceAccessor, RandomSource randomSource) {
+    public void addChildren(StructurePiece structurePiece, StructurePiecesBuilder structurePieceAccessor, RandomSource randomSource) {
         this.xRadius = randomSource.nextFloat() * (X_MAXRADIUS - X_MINRADIUS) + X_MINRADIUS;
         this.yRadius = randomSource.nextFloat() * (Y_MAXRADIUS - Y_MINRADIUS) + Y_MINRADIUS;
         this.zRadius = randomSource.nextFloat() * (Z_MAXRADIUS - Z_MINRADIUS) + Z_MINRADIUS;

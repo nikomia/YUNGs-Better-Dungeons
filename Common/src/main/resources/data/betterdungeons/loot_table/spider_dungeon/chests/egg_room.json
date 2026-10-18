@@ -31,25 +31,21 @@
         {
           "type": "minecraft:item",
           "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": [
-                "bane_of_arthropods"
-              ]
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": [
+              "bane_of_arthropods"
+            ]
+          },
           "name": "minecraft:book"
         },
         {
           "type": "minecraft:item",
           "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_random_loot"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": "#minecraft:on_random_loot"
+          },
           "name": "minecraft:book"
         }
       ]
@@ -64,131 +60,111 @@
         {
           "type": "minecraft:item",
           "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:weakness"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:weakness"
             }
-          ],
+          },
           "name": "minecraft:potion"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:slowness"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:slowness"
             }
-          ],
-          "name": "minecraft:potion"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:harming"
-              }
-            }
-          ],
+          },
           "name": "minecraft:potion"
         },
         {
           "type": "minecraft:item",
           "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:strong_harming"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:harming"
             }
-          ],
+          },
+          "name": "minecraft:potion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:strong_harming"
+            }
+          },
           "name": "minecraft:potion"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:invisibility"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:invisibility"
             }
-          ],
+          },
           "name": "minecraft:potion"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:weakness"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:weakness"
             }
-          ],
+          },
           "name": "minecraft:splash_potion"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:slowness"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:slowness"
             }
-          ],
+          },
           "name": "minecraft:splash_potion"
         },
         {
           "type": "minecraft:item",
           "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:harming"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:harming"
             }
-          ],
+          },
           "name": "minecraft:splash_potion"
         },
         {
           "type": "minecraft:item",
           "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:strong_harming"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:strong_harming"
             }
-          ],
+          },
           "name": "minecraft:splash_potion"
         },
         {
           "type": "minecraft:item",
           "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "potion_contents": "minecraft:invisibility"
-              }
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "potion_contents": "minecraft:invisibility"
             }
-          ],
+          },
           "name": "minecraft:splash_potion"
         }
       ]
@@ -203,76 +179,66 @@
         {
           "type": "minecraft:item",
           "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 5.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 2.0,
+              "max": 5.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:spider_eye"
         },
         {
           "type": "minecraft:item",
           "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 5.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 2.0,
+              "max": 5.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:coal"
         },
         {
           "type": "minecraft:item",
           "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 5.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 2.0,
+              "max": 5.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:beetroot_seeds"
         },
         {
           "type": "minecraft:item",
           "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 5.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 2.0,
+              "max": 5.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:pumpkin_seeds"
         },
         {
           "type": "minecraft:item",
           "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 5.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 2.0,
+              "max": 5.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:melon_seeds"
         },
         {
@@ -293,31 +259,27 @@
         {
           "type": "minecraft:item",
           "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 3.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 3.0,
+              "max": 6.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:cobweb"
         },
         {
           "type": "minecraft:item",
           "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 3.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 3.0,
+              "max": 6.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:string"
         }
       ]

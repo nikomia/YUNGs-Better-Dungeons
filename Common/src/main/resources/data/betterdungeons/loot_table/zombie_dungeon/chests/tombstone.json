@@ -11,31 +11,27 @@
         {
           "type": "minecraft:item",
           "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 3.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 3.0,
+              "max": 6.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:bone"
         },
         {
           "type": "minecraft:item",
           "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 3.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "min": 3.0,
+              "max": 6.0,
+              "type": "minecraft:uniform"
             }
-          ],
+          },
           "name": "minecraft:bone_meal"
         },
         {
@@ -51,16 +47,14 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": [
-                "smite",
-                "sweeping_edge",
-                "fire_aspect"
-              ]
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:enchant_randomly",
+            "options": [
+              "smite",
+              "sweeping_edge",
+              "fire_aspect"
+            ]
+          },
           "name": "minecraft:diamond_sword"
         }
       ]

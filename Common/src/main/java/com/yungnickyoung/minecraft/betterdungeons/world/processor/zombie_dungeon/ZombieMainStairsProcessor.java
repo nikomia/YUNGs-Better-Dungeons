@@ -75,9 +75,9 @@ public class ZombieMainStairsProcessor implements StructureProcessor, ISafeWorld
             // Begin spawning staircase
             RandomSource random = structurePlacementData.getRandom(blockInfoGlobal.pos());
 
-            BlockPos.MutableBlockPos leftPos = new BlockPos(blockInfoGlobal.pos().relative(facing.getCounterClockWise())).mutable();
-            BlockPos.MutableBlockPos middlePos = new BlockPos(blockInfoGlobal.pos()).mutable();
-            BlockPos.MutableBlockPos rightPos = new BlockPos(blockInfoGlobal.pos().relative(facing.getClockWise())).mutable();
+            BlockPos.MutableBlockPos leftPos = blockInfoGlobal.pos().relative(facing.getCounterClockWise()).mutable();
+            BlockPos.MutableBlockPos middlePos = blockInfoGlobal.pos().mutable();
+            BlockPos.MutableBlockPos rightPos = blockInfoGlobal.pos().relative(facing.getClockWise()).mutable();
             BlockState tempBlock;
             Optional<BlockState> tempOptional;
 
